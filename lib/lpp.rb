@@ -10,13 +10,13 @@ module Lpp
   REGEX = /NAPOVED PRIHODOV ZA (.+?) \((.+?)\)(.+?)(?:NAPOVED PRIHODOV ZA (.+?) \((.+?)\)(.+?))?Napovedi/m
 
   def self.arrivals(station)
-    uri = URI('http://wbus.talktrack.com/wap.aspx')
-    res = Net::HTTP.post_form(uri,
-      '__EVENTTARGET' => '',
-      '__EVENTARGUMENT' => '',
-      'tb_postaja' => station,
-      'b_send' => 'Prika%C5%BEi')
-
+    http = Net::HTTP.new('wbus.talktrack.com')
+    data = "__EVENTTARGET=&__EVENTARGUMENT=&tb_postaja=#{station}&b_send=Prika%C5%BEi"
+    headers = {
+      'User-Agent' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_3) AppleWebKit/537.36 (KHTML, like Gecko)',
+      'Content-Type' => 'application/x-www-form-urlencoded'
+    }
+    res = http.post('/wap.aspx', data, headers)
     text = Nokogiri::HTML(res.body).text
 
     raise 'Station not found' if /Postaje s tem imenom nismo našli/.match(text)

@@ -5,6 +5,13 @@ require 'lpp'
 require 'test_helper'
 
 class LppTest < Test::Unit::TestCase
+  def test_requesting
+    WebMock.allow_net_connect!
+    arrivals = Lpp.arrivals('bavarski')
+    assert_equal (arrivals['600011'] != nil), true
+    WebMock.disable_net_connect!
+  end
+
   def test_parsing
     response = File.read(File.join(File.dirname(__FILE__), 'response.html'))
     stub_request(:any, /wbus.talktrack.com\/.*/).
