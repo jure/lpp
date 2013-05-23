@@ -19,9 +19,11 @@ Or install it yourself as:
 ## Usage examples
 
 If you query Lpp to get arrivals from the main bus station in Ljubljana, Bavarski dvor:
+
     Lpp.arrivals('bavarski')
 
 You'll be returned a hash similar to this:
+
     {"600012"=>
       {:name=>"BAVARSKI DVOR",
        :buses=>
@@ -60,9 +62,11 @@ You'll be returned a hash similar to this:
              {:time=>"21:58", :easy=>false}]}}}}
 
 You can also get arrivals only for a specific bus number:
+
     Lpp.arrivals_for_bus('bavarski', 6)
 
 And you'll get only the arrivals that match bus number 6 (6, 6B, etc.)
+
     {"600012"=>
       {:name=>"BAVARSKI DVOR",
        :buses=>
