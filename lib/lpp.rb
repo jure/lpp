@@ -4,7 +4,6 @@ require "lpp/version"
 require 'net/http'
 require 'nokogiri'
 require 'open-uri'
-require 'pry'
 
 module Lpp
   REGEX = /NAPOVED PRIHODOV ZA (.+?) \((.+?)\)(.+?)(?:NAPOVED PRIHODOV ZA (.+?) \((.+?)\)(.+?))?Napovedi/m
